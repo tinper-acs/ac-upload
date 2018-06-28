@@ -1,0 +1,51 @@
+{
+  "name": "ac-upload",
+  "version": "0.0.3",
+  "description": "tinper-bee ac upload components",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "rm -rf lib && rm -rf dist && babel src -d lib --no-comments",
+    "bundle": "webpack --progress --mode=development  && webpack --progress -p --output-filename ac-upload.min.js"
+  },
+  "keywords": [
+    "yyuap",
+    "upload",
+    "tinper-bee"
+  ],
+  "author": {
+    "name": "Kvkens",
+    "email": "yueming@yonyou.com"
+  },
+  "bugs": {
+    "url": "https://github.com/tinper-acs/ac-upload/issues"
+  },
+  "homepage": "https://github.com/tinper-acs/ac-upload#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinper-acs/ac-upload.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^8.6.4",
+    "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "postcss-loader": "^2.1.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "style-loader": "^0.21.0",
+    "tinper-bee": "^1.5.1",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8"
+  }
+}
