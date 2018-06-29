@@ -1,0 +1,14 @@
+{
+    "data" : [{
+      "fileName" : "c12dc684-ef75-4aae-bea0-438889b3eb83_.png",
+      "accessAddress" : "http://10.10.24.43:8080/wbalone/images/c12dc684-ef75-4aae-bea0-438889b3eb83_.png"
+    },{
+      "fileName" : "c12dc684-ef75-4aae-bea0-438889b3eb83_.png",
+      "accessAddress" : "http://10.10.24.43:8080/wbalone/images/c12dc684-ef75-4aae-bea0-438889b3eb83_.png"
+    },{
+      "fileName" : "c12dc684-ef75-4aae-bea0-438889b3eb83_.png",
+      "accessAddress" : "http://10.10.24.43:8080/wbalone/images/c12dc684-ef75-4aae-bea0-438889b3eb83_.png"
+    }],
+    "status" : 1,
+    "msg" : "头像上传成功！"
+  }

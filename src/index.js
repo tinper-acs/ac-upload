@@ -17,7 +17,6 @@ const propTypes = {
     accept: PropTypes.string,
     name: PropTypes.string,
     data: PropTypes.object,
-    isView: PropTypes.bool,
     onSuccess: PropTypes.func,
     onError: PropTypes.func
 };
@@ -28,7 +27,8 @@ class AcUpload extends Component {
         this.state = {
             show: false,
             uploading: false,
-            isView: props.isView,
+            isView: false,
+            hisFileList: [],
             fileList: []
         }
         this.uploadProps = {
@@ -39,7 +39,7 @@ class AcUpload extends Component {
             accept: props.accept,
             beforeUpload: (file) => {
                 if (this.state.fileList.find(((item) => (item.name == file.name)))) {
-                    Message.create({ content: '图片选择重复', color: 'warning' });
+                    Message.create({ content: '重复选择文件', color: 'warning' });
                 } else {
                     this.setState(({ fileList }) => ({
                         fileList: [...fileList, file],
@@ -68,7 +68,8 @@ class AcUpload extends Component {
     showModeHandler = (e) => {
         if (e) e.stopPropagation();
         this.setState({
-            show: true
+            show: true,
+            isView: false
         });
     }
     //隐藏自身模态
@@ -102,9 +103,19 @@ class AcUpload extends Component {
             });
             this.props.onError && this.props.onError(err);
         });
-        this.setState({
-            uploading: false
+        this.setState(({ hisFileList }) => {
+            let newFileList = hisFileList.slice();
+            newFileList = newFileList.concat(result.data.data);
+
+            return {
+                uploading: false,
+                hisFileList: newFileList
+            }
         });
+        // this.setState({
+
+        //     hisFileList: result.data.data
+        // });
         if (result && result.data.status == 1) {
             this.props.onSuccess && this.props.onSuccess(result.data.data);
             this.setState({
@@ -113,6 +124,12 @@ class AcUpload extends Component {
             });
         }
     }
+    viewFileHandler = () => {
+        this.setState({
+            isView: true,
+            show: true
+        });
+    }
     render() {
         return (
             <div className="ac-upload-wrap">
@@ -120,6 +137,7 @@ class AcUpload extends Component {
                 <span onClick={this.showModeHandler}>
                     {this.props.children}
                 </span>
+                {this.state.hisFileList.length > 0 && <Button onClick={this.viewFileHandler} style={{ "marginLeft": "10px" }} colors="info" >查看</Button>}
                 <Modal
                     dialogClassName="ac-upload-modal"
                     backdrop={false}
@@ -134,26 +152,33 @@ class AcUpload extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="ac-upload-wrap">
-                            <Dragger {...this.uploadProps}>
+                            {!this.state.isView && <Dragger {...this.uploadProps}>
                                 <div className="opeat">
                                     <Icon type="inbox" className="uf-upload icon-upload" />
                                     <div className="upload-tips">拖拽文件到此处或</div>
                                     <div className="upload-tips">点击选择上传文件</div>
                                 </div>
-                            </Dragger>
+                            </Dragger>}
                             <div className="file-list">
-                                <ul className="file-list-item">
+                                {!this.state.isView && <ul className="file-list-item">
                                     {
                                         this.state.fileList.map((file, index) => (
                                             <li className="clearfix" key={index}>名称:「{file.name}」 大小:「{bytesToSize(file.size)}」 <Icon onClick={this.onRemove(file)} className="file-close" type="uf-close-bold" title={`删除${file.name}`} /></li>
                                         ))
                                     }
-                                </ul>
+                                </ul>}
+                                {this.state.isView && <ul className="file-list-item">
+                                    {
+                                        this.state.hisFileList.map((file, index) => (
+                                            <li className="clearfix" key={index}><a target="_blank" href={file.accessAddress}> 名称:「{file.fileName}」 </a> </li>
+                                        ))
+                                    }
+                                </ul>}
                             </div>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.startUploadClick} disabled={this.state.fileList.length != 0 ? false : true} colors="primary" > 开始上传 </Button>
+                        {!this.state.isView && <Button onClick={this.startUploadClick} disabled={this.state.fileList.length != 0 ? false : true} colors="primary" > 开始上传 </Button>}
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -170,7 +195,6 @@ AcUpload.defaultProps = {
     showUploadList: true,
     accept: "",
     name: "files[]",
-    data: {},
-    isView: false
+    data: {}
 }
 export default AcUpload;

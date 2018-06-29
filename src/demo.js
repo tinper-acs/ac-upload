@@ -6,6 +6,12 @@ import 'tinper-bee/assets/tinper-bee.css';
 import './index.less';
 
 class Demo extends Component {
+    constructor(){
+        super();
+        this.state = {
+            
+        }
+    }
     handlerUploadSuccess = (data) => {
         console.log(data);
     }
@@ -13,7 +19,7 @@ class Demo extends Component {
         return (
             <div>
                 <AcUpload
-                    action="/iuap_pap_quickstart/fileMananger/fastDfs/imgUpload"
+                    action="/upload.do"
                     multiple={true}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}
