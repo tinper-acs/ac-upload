@@ -17,6 +17,7 @@ const propTypes = {
     accept: PropTypes.string,
     name: PropTypes.string,
     data: PropTypes.object,
+    isView: PropTypes.bool,
     onSuccess: PropTypes.func,
     onError: PropTypes.func
 };
@@ -27,6 +28,7 @@ class AcUpload extends Component {
         this.state = {
             show: false,
             uploading: false,
+            isView: props.isView,
             fileList: []
         }
         this.uploadProps = {
@@ -168,6 +170,7 @@ AcUpload.defaultProps = {
     showUploadList: true,
     accept: "",
     name: "files[]",
-    data: {}
+    data: {},
+    isView: false
 }
 export default AcUpload;
