@@ -3,10 +3,10 @@
  */
 
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Upload, Message, Loading, Table, Popconfirm } from 'tinper-bee';
+import { Modal, Button, Icon, Upload, Message, Loading, Table, Popconfirm, ProgressBar } from 'tinper-bee';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { bytesToSize } from './common';
+import { bytesToSize, getPercent } from './common';
 
 const Dragger = Upload.Dragger;
 const propTypes = {
@@ -30,7 +30,8 @@ class AcUpload extends Component {
             uploading: false,
             isView: false,
             hisFileList: [],
-            fileList: []
+            fileList: [],
+            filePercent: 0
         }
         this.uploadProps = {
             name: 'file',
@@ -88,14 +89,18 @@ class AcUpload extends Component {
     }
     //删除上传文件
     onRemove = (file) => () => {
-        this.setState(({ fileList }) => {
-            const index = fileList.indexOf(file);
-            const newFileList = fileList.slice();
-            newFileList.splice(index, 1);
-            return {
-                fileList: newFileList,
-            };
-        });
+        if (this.state.filePercent > 0) {
+
+        } else {
+            this.setState(({ fileList }) => {
+                const index = fileList.indexOf(file);
+                const newFileList = fileList.slice();
+                newFileList.splice(index, 1);
+                return {
+                    fileList: newFileList,
+                };
+            });
+        }
     }
     //历史上传后的删除事件
     handlerTableRemove = (record, index) => () => {
@@ -114,15 +119,22 @@ class AcUpload extends Component {
         if (e) e.stopPropagation();
         this.setState({
             show: true,
-            isView: false
+            isView: false,
+            filePercent: 0
         });
     }
     //隐藏自身模态
     hideModelHandler = () => {
-        this.setState({
-            show: false,
-            fileList: []
-        });
+        if (this.state.filePercent > 0) {
+
+        } else {
+            this.setState({
+                show: false,
+                fileList: [],
+                filePercent: 0
+            });
+        }
+
     }
     //打开模态触发
     onEnter = () => {
@@ -154,7 +166,9 @@ class AcUpload extends Component {
             data: formData,
             timeout: 50000,
             onUploadProgress: (progressEvent) => {
-                console.log(progressEvent);
+                this.setState({
+                    filePercent: getPercent(progressEvent.loaded, progressEvent.total)
+                });
             }
         }).catch(err => {
             this.setState({
@@ -168,7 +182,8 @@ class AcUpload extends Component {
 
             return {
                 uploading: false,
-                hisFileList: newFileList
+                hisFileList: newFileList,
+                filePercent: 0
             }
         });
         // this.setState({
@@ -192,7 +207,7 @@ class AcUpload extends Component {
     render() {
         return (
             <div className="ac-upload-wrap">
-                <Loading container={this.getElement} loadingType="line" show={this.state.uploading} />
+                <Loading container={this.getElement} loadingType="line" />
                 <span onClick={this.showModeHandler}>
                     {this.props.children}
                 </span>
@@ -218,6 +233,9 @@ class AcUpload extends Component {
                                     <div className="upload-tips">点击选择上传文件</div>
                                 </div>
                             </Dragger>}
+                            {!this.state.isView && <div className="file-progress">
+                                <ProgressBar size="sm" now={this.state.filePercent} />
+                            </div>}
                             <div className="file-list">
                                 {!this.state.isView && <ul className="file-list-item">
                                     {
@@ -245,7 +263,7 @@ class AcUpload extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        {!this.state.isView && <Button onClick={this.startUploadClick} disabled={this.state.fileList.length != 0 ? false : true} colors="primary" > 开始上传 </Button>}
+                        {!this.state.isView && <Button onClick={this.startUploadClick} disabled={(this.state.fileList.length != 0 && this.state.filePercent == 0) ? false : true} colors="primary" > 开始上传 </Button>}
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -263,6 +281,6 @@ AcUpload.defaultProps = {
     accept: "",
     name: "files[]",
     data: {},
-    maxSize: 10240000
+    maxSize: 10240000000
 }
 export default AcUpload;

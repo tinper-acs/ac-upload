@@ -1,12 +1,12 @@
 {
   "name": "ac-upload",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "tinper-bee ac upload components",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "uba server --port=5171",
     "dist": "uba build",
-    "build": "rm -rf lib && rm -rf dist && babel src -d lib --no-comments",
+    "build": "rm -rf build && rm -rf lib && rm -rf dist && babel src -d lib --no-comments",
     "bundle": "webpack --progress --mode=development  && webpack --progress -p --output-filename ac-upload.min.js"
   },
   "keywords": [

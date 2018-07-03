@@ -6,3 +6,7 @@ export const bytesToSize = (bytes) => {
 
     return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 }
+
+export const getPercent = (num, total) => {
+    return total <= 0 ? 0 : (Math.round(num / total * 10000) / 100.00);
+}
