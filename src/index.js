@@ -1,9 +1,9 @@
 /**
- * 图片手动上传组件
+ * 手动上传组件
  */
 
 import React, { Component } from 'react';
-import { Modal, Button, Icon, Upload, Message, Loading } from 'tinper-bee';
+import { Modal, Button, Icon, Upload, Message, Loading, Table, Popconfirm } from 'tinper-bee';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { bytesToSize } from './common';
@@ -18,7 +18,8 @@ const propTypes = {
     name: PropTypes.string,
     data: PropTypes.object,
     onSuccess: PropTypes.func,
-    onError: PropTypes.func
+    onError: PropTypes.func,
+    maxSize: PropTypes.number
 };
 
 class AcUpload extends Component {
@@ -38,6 +39,10 @@ class AcUpload extends Component {
             action: props.action,
             accept: props.accept,
             beforeUpload: (file) => {
+                if (file.size > this.props.maxSize) {
+                    Message.create({ content: '文件大小超过默认值', color: 'warning' });
+                    return false;
+                }
                 if (this.state.fileList.find(((item) => (item.name == file.name)))) {
                     Message.create({ content: '重复选择文件', color: 'warning' });
                 } else {
@@ -48,6 +53,34 @@ class AcUpload extends Component {
                 return false;
             }
         };
+
+    }
+    hisFileColumns = () => {
+        let self = this;
+        return [{
+            title: "序号",
+            dataIndex: "fileName",
+            width: 25,
+            render(text, record, index) {
+                return index + 1;
+            }
+        }, {
+            title: "文件名",
+            dataIndex: "fileName",
+            width: 265,
+            render(text, record, index) {
+                return <span className="table-link"><a target="_blank" href={record.accessAddress}>{record.fileName}</a></span>
+            }
+        }, {
+            title: "操作",
+            dataIndex: "fileName",
+            width: 25,
+            render(text, record, index) {
+                return (<span className="table-link">
+                    <a onClick={self.handlerTableRemove(record, index)} href="javascript:;">删除</a>
+                </span>)
+            }
+        }]
     }
     //获得加载dom
     getElement = () => {
@@ -61,6 +94,18 @@ class AcUpload extends Component {
             newFileList.splice(index, 1);
             return {
                 fileList: newFileList,
+            };
+        });
+    }
+    //历史上传后的删除事件
+    handlerTableRemove = (record, index) => () => {
+        this.setState(({ hisFileList }) => {
+            const index = hisFileList.indexOf(record);
+            const newFileList = hisFileList.slice();
+            newFileList.splice(index, 1);
+            this.props.onSuccess && this.props.onSuccess(newFileList);
+            return {
+                hisFileList: newFileList,
             };
         });
     }
@@ -97,7 +142,21 @@ class AcUpload extends Component {
         for (let key in data) {
             formData.append(key, data[key]);
         }
-        let result = await axios.post(this.props.action, formData).catch(err => {
+        // let result = await axios.post(this.props.action, formData).catch(err => {
+        //     this.setState({
+        //         uploading: false
+        //     });
+        //     this.props.onError && this.props.onError(err);
+        // });
+        let result = await axios({
+            url: this.props.action,
+            method: 'post',
+            data: formData,
+            timeout: 50000,
+            onUploadProgress: (progressEvent) => {
+                console.log(progressEvent);
+            }
+        }).catch(err => {
             this.setState({
                 uploading: false
             });
@@ -168,11 +227,19 @@ class AcUpload extends Component {
                                     }
                                 </ul>}
                                 {this.state.isView && <ul className="file-list-item">
-                                    {
+                                    <Table
+                                        columns={this.hisFileColumns()}
+                                        data={this.state.hisFileList}
+                                        bordered
+                                        scroll={{ y: 230 }}
+                                        emptyText={() => <span>暂无附件</span>}
+                                    >
+                                    </Table>
+                                    {/* {
                                         this.state.hisFileList.map((file, index) => (
                                             <li className="clearfix" key={index}><a target="_blank" href={file.accessAddress}> 名称:「{file.fileName}」 </a> </li>
                                         ))
-                                    }
+                                    } */}
                                 </ul>}
                             </div>
                         </div>
@@ -191,10 +258,11 @@ AcUpload.propTypes = propTypes;
 AcUpload.defaultProps = {
     title: "文件上传",
     multiple: false,
-    action: "/upload",
+    action: "/iuap_pap_quickstart/fileMananger/fastDfs/imgUpload",
     showUploadList: true,
     accept: "",
     name: "files[]",
-    data: {}
+    data: {},
+    maxSize: 10240000
 }
 export default AcUpload;

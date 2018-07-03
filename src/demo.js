@@ -19,7 +19,6 @@ class Demo extends Component {
         return (
             <div>
                 <AcUpload
-                    action="/upload.do"
                     multiple={true}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}

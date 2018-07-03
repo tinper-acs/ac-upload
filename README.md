@@ -57,5 +57,6 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 4|accept|string|接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)
 5|data|object|随着上传的时候附加一些参数，接收JSON对象
 6|name|string|上传设置的参数file名字默认`files[]`
-7|onSuccess|function|上传成功后的回调，回调参数数组对象包含本次上传后的完成路径以及修改后的名称[{"accessAddress":"http://10.10.24.43:8080/wbalone/images/5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png","fileName":"5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png"}]
-8|onError|function|上传失败后的回调，用于处理后续失败操作
+7|maxSize|number|上传附件大小限制，默认10MB
+8|onSuccess|function|上传成功后的回调，回调参数数组对象包含本次上传后的完成路径以及修改后的名称[{"accessAddress":"http://10.10.24.43:8080/wbalone/images/5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png","fileName":"5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png"}]
+9|onError|function|上传失败后的回调，用于处理后续失败操作
