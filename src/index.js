@@ -214,7 +214,7 @@ class AcUpload extends Component {
     }
     render() {
         return (
-            <div className="ac-upload-wrap">
+            <span className="ac-upload-wrap">
                 <Loading container={this.getElement} loadingType="line" />
                 <span onClick={this.showModeHandler}>
                     {this.props.children}
@@ -275,7 +275,7 @@ class AcUpload extends Component {
                         {!this.state.isView && <Button onClick={this.startUploadClick} disabled={(this.state.fileList.length != 0 && this.state.filePercent == 0) ? false : true} colors="primary" > 开始上传 </Button>}
                     </Modal.Footer>
                 </Modal>
-            </div>
+            </span>
         );
     }
 }
