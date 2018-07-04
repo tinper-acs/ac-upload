@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     // mode: 'production',
-    entry: ['./src/index.js','./src/index.less'],
+    entry: ['./src/index.js', './src/index.less'],
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'ac-upload.js',
@@ -46,6 +46,15 @@ module.exports = {
                     loader: ('less-loader')
                 }
                 ]
+            }, {
+                test: /\.(png|jpg|svg|jpeg|gif)(\?.+)?$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 102400000,
+                        name: 'images/[name].[hash:8].[ext]'
+                    }
+                }]
             }
         ]
     },

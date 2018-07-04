@@ -13,12 +13,19 @@
                     font-size: 60px;
                     color: #40a5ed;
                 }
+                .svg-ready {
+                    background: url(../static/ready-upload.svg) no-repeat center center;
+                    width: 100%;
+                    height: 80px;
+                }
             }
             .file-progress {
                 padding-top: 10px;
             }
             .file-list {
                 text-align: left;
+                max-height: 268px;
+                overflow: auto;
                 .table-link {
                     a:link {
                         color: #585858
@@ -39,11 +46,23 @@
                 }
                 .file-list-item {
                     font-size: 12px;
+                    .file-item-onec {
+                        display: flex;
+                        align-items: center;
+                        padding: 0 6px;
+                        position: relative;
+                        .file-name {
+                            margin: 0 8px;
+                        }
+                    }
                     li {
-                        border-bottom: 1px dashed #ececec;
-                        line-height: 30px;
+                        line-height: 50px;
+                        height: 50px;
                         transition: all .5s;
                         padding: 0 4px;
+                        height: 50px;
+                        background-color: #fafafa;
+                        margin: 3px 0;
                         &:hover {
                             background-color: #edf8fd;
                             transition: all .5s;
@@ -55,6 +74,10 @@
                         cursor: pointer;
                         color: #a5a5a5;
                         transition: all .5s;
+                        font-size: 12px;
+                        position: absolute;
+                        top: 0px;
+                        right: 6px;
                         &:hover {
                             color: #5d5d5d;
                             transition: all .5s;
@@ -63,9 +86,174 @@
                 }
             }
             .upload-tips {
-                font-size: 14px;
+                font-size: 12px;
                 color: #7b7b7b;
             }
         }
+        .file-svg-pdf {
+            background: url(../static/format/pdf.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-svg {
+            background: url(../static/format/image.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-css {
+            background: url(../static/format/css.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-csv {
+            background: url(../static/format/csv.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-doc {
+            background: url(../static/format/doc.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-xlsx {
+            background: url(../static/format/excel.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-xls {
+            background: url(../static/format/excel.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-exe {
+            background: url(../static/format/exe.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-fla {
+            background: url(../static/format/flash.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-html {
+            background: url(../static/format/html.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-png {
+            background: url(../static/format/png.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-jpg {
+            background: url(../static/format/jpg.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-gif {
+            background: url(../static/format/image.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-jpeg {
+            background: url(../static/format/jpg.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-js {
+            background: url(../static/format/js.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-ppt {
+            background: url(../static/format/ppt.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-psd {
+            background: url(../static/format/psd.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-txt {
+            background: url(../static/format/txt.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-docx {
+            background: url(../static/format/word.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-xml {
+            background: url(../static/format/xml.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-zip {
+            background: url(../static/format/zip.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-rar {
+            background: url(../static/format/zip.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        .file-svg-unknown {
+            background: url(../static/format/unknown.svg) no-repeat center center;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100%;
+        }
+        
+        
+        
+        
     }
 }

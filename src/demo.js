@@ -20,6 +20,7 @@ class Demo extends Component {
             <div>
                 <AcUpload
                     multiple={true}
+                    isShow={true}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}
                 >

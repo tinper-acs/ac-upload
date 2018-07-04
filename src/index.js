@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { Modal, Button, Icon, Upload, Message, Loading, Table, Popconfirm, ProgressBar } from 'tinper-bee';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { bytesToSize, getPercent } from './common';
+import { bytesToSize, getPercent, getFileTypeIcon } from './common';
 
 const Dragger = Upload.Dragger;
 const propTypes = {
@@ -19,7 +19,8 @@ const propTypes = {
     data: PropTypes.object,
     onSuccess: PropTypes.func,
     onError: PropTypes.func,
-    maxSize: PropTypes.number
+    maxSize: PropTypes.number,
+    isShow: PropTypes.bool
 };
 
 class AcUpload extends Component {
@@ -40,6 +41,7 @@ class AcUpload extends Component {
             action: props.action,
             accept: props.accept,
             beforeUpload: (file) => {
+                console.log(file);
                 if (file.size > this.props.maxSize) {
                     Message.create({ content: '文件大小超过默认值', color: 'warning' });
                     return false;
@@ -176,27 +178,33 @@ class AcUpload extends Component {
             });
             this.props.onError && this.props.onError(err);
         });
-        this.setState(({ hisFileList }) => {
-            let newFileList = hisFileList.slice();
-            newFileList = newFileList.concat(result.data.data);
+        if (result) {
+            this.setState(({ hisFileList }) => {
+                let newFileList = hisFileList.slice();
+                newFileList = newFileList.concat(result.data.data);
+                return {
+                    uploading: false,
+                    hisFileList: newFileList,
+                    filePercent: 0
+                }
+            });
+            // this.setState({
 
-            return {
-                uploading: false,
-                hisFileList: newFileList,
-                filePercent: 0
+            //     hisFileList: result.data.data
+            // });
+            if (result && result.data.status == 1) {
+                this.props.onSuccess && this.props.onSuccess(result.data.data);
+                this.setState({
+                    show: false,
+                    fileList: []
+                });
             }
-        });
-        // this.setState({
-
-        //     hisFileList: result.data.data
-        // });
-        if (result && result.data.status == 1) {
-            this.props.onSuccess && this.props.onSuccess(result.data.data);
+        } else {
             this.setState({
-                show: false,
-                fileList: []
+                filePercent: 0
             });
         }
+
     }
     viewFileHandler = () => {
         this.setState({
@@ -211,7 +219,7 @@ class AcUpload extends Component {
                 <span onClick={this.showModeHandler}>
                     {this.props.children}
                 </span>
-                {this.state.hisFileList.length > 0 && <Button onClick={this.viewFileHandler} style={{ "marginLeft": "10px" }} colors="info" >查看</Button>}
+                {(this.state.hisFileList.length > 0 && this.props.isShow) && <Button onClick={this.viewFileHandler} style={{ "marginLeft": "10px" }} colors="info" >查看</Button>}
                 <Modal
                     dialogClassName="ac-upload-modal"
                     backdrop={false}
@@ -228,7 +236,8 @@ class AcUpload extends Component {
                         <div className="ac-upload-wrap">
                             {!this.state.isView && <Dragger {...this.uploadProps}>
                                 <div className="opeat">
-                                    <Icon type="inbox" className="uf-upload icon-upload" />
+                                    {/* <Icon type="inbox" className="uf-upload icon-upload" /> */}
+                                    <div className="svg-ready"></div>
                                     <div className="upload-tips">拖拽文件到此处或</div>
                                     <div className="upload-tips">点击选择上传文件</div>
                                 </div>
@@ -240,7 +249,7 @@ class AcUpload extends Component {
                                 {!this.state.isView && <ul className="file-list-item">
                                     {
                                         this.state.fileList.map((file, index) => (
-                                            <li className="clearfix" key={index}>名称:「{file.name}」 大小:「{bytesToSize(file.size)}」 <Icon onClick={this.onRemove(file)} className="file-close" type="uf-close-bold" title={`删除${file.name}`} /></li>
+                                            <li className="file-item-onec" key={index}><span className={getFileTypeIcon(file.name)}></span> <span className="file-name">{file.name}</span><Icon onClick={this.onRemove(file)} className="file-close" type="uf-close-bold" title={`删除${file.name}`} /></li>
                                         ))
                                     }
                                 </ul>}
@@ -281,6 +290,7 @@ AcUpload.defaultProps = {
     accept: "",
     name: "files[]",
     data: {},
-    maxSize: 10240000000
+    maxSize: 10240000000,
+    isShow: true
 }
 export default AcUpload;

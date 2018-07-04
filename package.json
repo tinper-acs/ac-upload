@@ -1,6 +1,6 @@
 {
   "name": "ac-upload",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "tinper-bee ac upload components",
   "main": "./lib/index.js",
   "scripts": {
@@ -38,6 +38,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.0",
@@ -47,9 +48,10 @@
     "react-dom": "^16.4.1",
     "style-loader": "^0.21.0",
     "tinper-bee": "^1.5.1",
-    "uba": "4.0.1",
+    "uba": "4.0.2",
     "uba-server-mock": "^2.0.2",
     "uba-server-proxy": "^2.0.2",
+    "url-loader": "^1.0.1",
     "webpack": "^4.12.2",
     "webpack-cli": "^3.0.8"
   }

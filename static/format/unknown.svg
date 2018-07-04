@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/文件格式/unknown</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="icon/文件格式/unknown" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Shape">
+            <path d="M4.390625,1.66533454e-15 C3.078125,1.66533454e-15 2,1.078125 2,2.390625 L2,27.609375 C2,28.921875 3.078125,30 4.390625,30 L25.859375,30 C27.171875,30 28.25,28.921875 28.25,27.609375 L28.25,9.515625 L19.390625,0 L4.390625,0 L4.390625,1.66533454e-15 Z" fill="#8199AF"></path>
+            <path d="M28.25,9.5625 L28.25,10.03125 L22.25,10.03125 C22.25,10.03125 19.296875,9.421875 19.34375,6.84375 C19.34375,6.84375 19.484375,9.5625 22.203125,9.5625 L28.25,9.5625 Z" fill="#617F9B"></path>
+            <path d="M19.390625,0 L19.390625,6.84375 C19.390625,7.59375 19.90625,9.5625 22.25,9.5625 L28.25,9.5625 L19.390625,0 Z" fill="#FFFFFF" opacity="0.5"></path>
+        </g>
+    </g>
+</svg>
