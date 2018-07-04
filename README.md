@@ -11,8 +11,7 @@
 
 手动上传组件，可以帮助你打开一个模态框选择文件进行上传、也包括拖拽式的上传方式，支持单个文件以及多个文件一起上传使用，上传完毕后，组件会显示查看附件信息
 
-![image](https://user-images.githubusercontent.com/3817644/42021795-22cb33cc-7aee-11e8-88a2-b980ca1af840.png)
-
+![image](https://user-images.githubusercontent.com/3817644/42263059-8e8317dc-7f9f-11e8-890f-6a45fd3e0e22.png)
 
 ### 2. 安装
 
