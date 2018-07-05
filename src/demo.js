@@ -6,20 +6,27 @@ import 'tinper-bee/assets/tinper-bee.css';
 import './index.less';
 
 class Demo extends Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            
+
         }
     }
     handlerUploadSuccess = (data) => {
+        console.log('成功');
         console.log(data);
     }
     render() {
         return (
             <div>
                 <AcUpload
-                    multiple={true}
+                    defaultFileList={[{
+                        uid: 1,
+                        name: 'ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
+                        status: 'done',
+                        url: 'http://10.10.24.43:8080/wbalone/images/ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
+                    }]}
+                    multiple={false}
                     isShow={true}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}

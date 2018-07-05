@@ -51,12 +51,11 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 序号 | 参数 | 类型 | 说明
 ---|---|---|---
 1|title|string|打开上传的模态框显示的标题文字
-2|multiple|bool|是否允许多选
-3|action|string|必选参数, 上传的地址
-4|accept|string|接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)
-5|data|object|随着上传的时候附加一些参数，接收JSON对象
-6|name|string|上传设置的参数file名字默认`files[]`
-7|maxSize|number|上传附件大小限制
-8|isShow|bool|是否显示浏览态，默认显示
-9|onSuccess|function|上传成功后的回调，回调参数数组对象包含本次上传后的完成路径以及修改后的名称[{"accessAddress":"http://10.10.24.43:8080/wbalone/images/5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png","fileName":"5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png"}]
-10|onError|function|上传失败后的回调，用于处理后续失败操作
+2|defaultFileList|object[]|默认已经上传的文件列表
+3|multiple|bool|是否允许多选
+4|action|string|必选参数, 上传的地址
+5|accept|string|接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)
+6|data|object|随着上传的时候附加一些参数，接收JSON对象
+7|name|string|上传设置的参数file名字默认`files[]`
+8|onSuccess|function|上传成功后的回调，回调参数数组对象包含本次上传后的完成路径以及修改后的名称[{"accessAddress":"http://10.10.24.43:8080/wbalone/images/5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png","fileName":"5441cbb2-27e6-4a9d-98b3-448f3f78de55_.png"}]
+9|onError|function|上传失败后的回调，用于处理后续失败操作
