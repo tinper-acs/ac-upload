@@ -21,10 +21,8 @@ class Demo extends Component {
             <div>
                 <AcUpload
                     defaultFileList={[{
-                        uid: 1,
-                        name: 'ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
-                        status: 'done',
-                        url: 'http://10.10.24.43:8080/wbalone/images/ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
+                        fileName: 'ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
+                        accessAddress: 'http://10.10.24.43:8080/wbalone/images/ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
                     }]}
                     multiple={false}
                     isShow={true}

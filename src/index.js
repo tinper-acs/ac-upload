@@ -20,8 +20,7 @@ class AcUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            fileList: []
+            show: false
         }
         this.uploadProps = {
             name: props.name,
@@ -29,9 +28,8 @@ class AcUpload extends Component {
             showUploadList: props.showUploadList,
             action: props.action,
             accept: props.accept,
-            defaultFileList: props.defaultFileList,
+            defaultFileList: this.defaultFileListToList(props.defaultFileList),
             onChange: (msg) => {
-                console.log(msg);
                 if (msg.file.status == 'done' && msg.file.response.status == 1) {
                     props.onSuccess && props.onSuccess(msg.file.response.data);
                 }
@@ -42,13 +40,29 @@ class AcUpload extends Component {
                     console.log('uploading');
                 }
                 if (msg.file.status == 'removed') {
-                    console.log('removed');
+                    console.log(msg);
+                    // props.onSuccess && props.onSuccess();
                 }
-                
             }
         };
 
     }
+
+    defaultFileListToList = (_list) => {
+        let newData = [];
+        if (Array.isArray(_list)) {
+            for (let i = 0; i < _list.length; i++) {
+                  newData.push({
+                    uid : _list[i].fileName,
+                    name : _list[i].fileName,
+                    status: 'done',
+                    url : _list[i].accessAddress
+                  });
+            }
+        }
+        return newData;
+    }
+
     //显示自身模态
     showModeHandler = (e) => {
         if (e) e.stopPropagation();
@@ -59,8 +73,7 @@ class AcUpload extends Component {
     //隐藏自身模态
     hideModelHandler = () => {
         this.setState({
-            show: false,
-            fileList: []
+            show: false
         });
     }
     viewFileHandler = () => {
