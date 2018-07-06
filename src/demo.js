@@ -34,7 +34,7 @@ class Demo extends Component {
                 <AcUpload
                     defaultFileList={this.state.testList}
                     multiple={false}
-                    isView={false}
+                    isView={true}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}
                 >

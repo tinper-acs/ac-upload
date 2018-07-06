@@ -111,6 +111,10 @@ class AcUpload extends Component {
                                     <div className="upload-tips">点击选择上传文件</div>
                                 </div>}
                             </Upload>
+                            {this.props.isView && <div className="opeat">
+                                <div className="svg-no-pic"></div>
+                                <div style={{ "fontSize": "14px" }} className="upload-tips">暂无附件</div>
+                            </div>}
                         </div>
                     </Modal.Body>
                 </Modal>
