@@ -25,7 +25,7 @@ class Demo extends Component {
                         accessAddress: 'http://10.10.24.43:8080/wbalone/images/ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
                     }]}
                     multiple={false}
-                    isShow={true}
+                    isView={false}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}
                 >

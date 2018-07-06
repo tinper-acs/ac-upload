@@ -13,7 +13,8 @@ const propTypes = {
     showUploadList: PropTypes.bool,
     accept: PropTypes.string,
     name: PropTypes.string,
-    data: PropTypes.object
+    data: PropTypes.object,
+    isView: PropTypes.bool
 };
 
 class AcUpload extends Component {
@@ -41,7 +42,7 @@ class AcUpload extends Component {
                 }
                 if (msg.file.status == 'removed') {
                     console.log(msg);
-                    // props.onSuccess && props.onSuccess();
+                    props.onDelete && props.onDelete(msg.file);
                 }
             }
         };
@@ -52,12 +53,12 @@ class AcUpload extends Component {
         let newData = [];
         if (Array.isArray(_list)) {
             for (let i = 0; i < _list.length; i++) {
-                  newData.push({
-                    uid : _list[i].fileName,
-                    name : _list[i].fileName,
+                newData.push({
+                    uid: _list[i].fileName,
+                    name: _list[i].fileName,
                     status: 'done',
-                    url : _list[i].accessAddress
-                  });
+                    url: _list[i].accessAddress
+                });
             }
         }
         return newData;
@@ -100,12 +101,12 @@ class AcUpload extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="ac-upload-wrap">
-                            {!this.state.isView && <Upload {...this.uploadProps}>
-                                <div className="opeat">
+                            <Upload {...this.uploadProps}>
+                                {!this.props.isView && <div className="opeat">
                                     <div className="svg-ready"></div>
                                     <div className="upload-tips">点击选择上传文件</div>
-                                </div>
-                            </Upload>}
+                                </div>}
+                            </Upload>
                         </div>
                     </Modal.Body>
                 </Modal>
@@ -125,6 +126,7 @@ AcUpload.defaultProps = {
     name: "files[]",
     data: {},
     maxSize: 10240000000,
-    defaultFileList: []
+    defaultFileList: [],
+    isView: false
 }
 export default AcUpload;
