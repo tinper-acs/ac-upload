@@ -21,34 +21,15 @@ class AcUpload extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            historyData: props.defaultFileList
         }
-        this.uploadProps = {
-            name: props.name,
-            multiple: props.multiple,
-            showUploadList: props.showUploadList,
-            action: props.action,
-            accept: props.accept,
-            defaultFileList: this.defaultFileListToList(props.defaultFileList),
-            onChange: (msg) => {
-                if (msg.file.status == 'done' && msg.file.response.status == 1) {
-                    props.onSuccess && props.onSuccess(msg.file.response.data);
-                }
-                if (msg.file.status == 'error') {
-                    props.onError && props.onError();
-                }
-                if (msg.file.status == 'uploading') {
-                    console.log('uploading');
-                }
-                if (msg.file.status == 'removed') {
-                    console.log(msg);
-                    props.onDelete && props.onDelete(msg.file);
-                }
-            }
-        };
-
     }
-
+    componentWillReceiveProps = (newProps) => {
+        this.setState({
+            historyData: newProps.defaultFileList
+        });
+    }
     defaultFileListToList = (_list) => {
         let newData = [];
         if (Array.isArray(_list)) {
@@ -83,6 +64,29 @@ class AcUpload extends Component {
         });
     }
     render() {
+        const uploadProps = {
+            name: this.props.name,
+            multiple: this.props.multiple,
+            showUploadList: this.props.showUploadList,
+            action: this.props.action,
+            accept: this.props.accept,
+            defaultFileList: this.defaultFileListToList(this.state.historyData),
+            onChange: (msg) => {
+                if (msg.file.status == 'done' && msg.file.response.status == 1) {
+                    this.props.onSuccess && this.props.onSuccess(msg.file.response.data);
+                }
+                if (msg.file.status == 'error') {
+                    this.props.onError && this.props.onError();
+                }
+                if (msg.file.status == 'uploading') {
+                    console.log('uploading');
+                }
+                if (msg.file.status == 'removed') {
+                    console.log(msg);
+                    this.props.onDelete && this.props.onDelete(msg.file);
+                }
+            }
+        };
         return (
             <span className="ac-upload-wrap">
                 <span onClick={this.showModeHandler}>
@@ -101,7 +105,7 @@ class AcUpload extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <div className="ac-upload-wrap">
-                            <Upload {...this.uploadProps}>
+                            <Upload {...uploadProps}>
                                 {!this.props.isView && <div className="opeat">
                                     <div className="svg-ready"></div>
                                     <div className="upload-tips">点击选择上传文件</div>
