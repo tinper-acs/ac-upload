@@ -37,7 +37,7 @@ class AcUpload extends Component {
                 if (_list[i]['del'] == null) {
                     newData.push({
                         uid: _list[i].fileName,
-                        name: _list[i].fileName,
+                        name: _list[i].originalFileName,
                         status: 'done',
                         url: _list[i].accessAddress
                     });
