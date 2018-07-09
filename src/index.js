@@ -34,12 +34,14 @@ class AcUpload extends Component {
         let newData = [];
         if (Array.isArray(_list)) {
             for (let i = 0; i < _list.length; i++) {
-                newData.push({
-                    uid: _list[i].fileName,
-                    name: _list[i].fileName,
-                    status: 'done',
-                    url: _list[i].accessAddress
-                });
+                if (_list[i]['del'] == null) {
+                    newData.push({
+                        uid: _list[i].fileName,
+                        name: _list[i].fileName,
+                        status: 'done',
+                        url: _list[i].accessAddress
+                    });
+                }
             }
         }
         return newData;
