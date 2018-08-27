@@ -9,7 +9,7 @@ class Demo extends Component {
     constructor() {
         super();
         this.state = {
-            testList : []
+            testList: []
         }
     }
     handlerUploadSuccess = (data) => {
@@ -18,10 +18,10 @@ class Demo extends Component {
     }
     addTest = () => {
         this.setState({
-            testList : [{
+            testList: [{
                 fileName: 'b11a50c1f1-2f8e-4737-b341-e710010307e5_.png',
                 accessAddress: 'http://10.10.24.43:8080/wbalone/images/ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
-            },{
+            }, {
                 fileName: 'b22a50c1f1-2f8e-4737-b341-e710010307e5_.png',
                 accessAddress: 'http://10.10.24.43:8080/wbalone/images/ba50c1f1-2f8e-4737-b341-e710010307e5_.png',
             }]
@@ -32,9 +32,10 @@ class Demo extends Component {
             <div>
                 <Button onClick={this.addTest} colors="success">加</Button>
                 <AcUpload
+                    action="/upload.do"
                     defaultFileList={this.state.testList}
                     multiple={false}
-                    isView={true}
+                    isView={false}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}
                 >

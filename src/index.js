@@ -1,5 +1,5 @@
 /**
- * 手动上传组件
+ * 上传组件
  */
 
 import React, { Component } from 'react';
@@ -75,7 +75,12 @@ class AcUpload extends Component {
             defaultFileList: this.defaultFileListToList(this.state.historyData),
             onChange: (msg) => {
                 if (msg.file.status == 'done' && msg.file.response.status == 1) {
-                    this.props.onSuccess && this.props.onSuccess(msg.file.response.data);
+                    this.props.onSuccess && this.props.onSuccess(msg.file.response);
+                    if (!this.props.multiple) {
+                        this.setState({
+                            show: false
+                        });
+                    }
                 }
                 if (msg.file.status == 'error') {
                     this.props.onError && this.props.onError();
