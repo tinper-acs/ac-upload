@@ -1,5 +1,5 @@
 /**
- * 上传组件
+ * Ac上传组件
  */
 
 import React, { Component } from 'react';
@@ -14,6 +14,7 @@ const propTypes = {
     accept: PropTypes.string,
     name: PropTypes.string,
     data: PropTypes.object,
+    maxSize: PropTypes.number,
     isView: PropTypes.bool
 };
 
@@ -68,6 +69,8 @@ class AcUpload extends Component {
     render() {
         const uploadProps = {
             name: this.props.name,
+            data: this.props.data,
+            size: this.props.maxSize,
             multiple: this.props.multiple,
             showUploadList: this.props.showUploadList,
             action: this.props.action,
