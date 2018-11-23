@@ -59,3 +59,4 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 8|onSuccess|function|上传成功后的回调，返回所有response
 9|onError|function|上传失败后的回调，用于处理后续失败操作
 10|maxSize|number|附件限制大小
+11|onDelete|function|删除的时候触发的回调参数为file对象

@@ -34,7 +34,7 @@ class Demo extends Component {
                 <AcUpload
                     action="/upload.do"
                     defaultFileList={this.state.testList}
-                    multiple={false}
+                    multiple={true}
                     isView={false}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}

@@ -38,7 +38,7 @@ class AcUpload extends Component {
                 if (_list[i]['del'] == null) {
                     newData.push({
                         uid: _list[i].fileName,
-                        name: _list[i].originalFileName,
+                        name: _list[i].fileName,
                         status: 'done',
                         url: _list[i].accessAddress
                     });
@@ -89,10 +89,9 @@ class AcUpload extends Component {
                     this.props.onError && this.props.onError();
                 }
                 if (msg.file.status == 'uploading') {
-                    console.log('uploading');
+                    
                 }
                 if (msg.file.status == 'removed') {
-                    console.log(msg);
                     this.props.onDelete && this.props.onDelete(msg.file);
                 }
             }
