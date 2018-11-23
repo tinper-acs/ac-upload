@@ -37,10 +37,11 @@ class AcUpload extends Component {
             for (let i = 0; i < _list.length; i++) {
                 if (_list[i]['del'] == null) {
                     newData.push({
-                        uid: _list[i].fileName,
-                        name: _list[i].fileName,
+                        id: _list[i].id || "",
+                        uid: _list[i].fileName || "",
+                        name: _list[i].fileName || "",
                         status: 'done',
-                        url: _list[i].accessAddress
+                        url: _list[i].accessAddress || ""
                     });
                 }
             }
@@ -89,7 +90,7 @@ class AcUpload extends Component {
                     this.props.onError && this.props.onError();
                 }
                 if (msg.file.status == 'uploading') {
-                    
+
                 }
                 if (msg.file.status == 'removed') {
                     this.props.onDelete && this.props.onDelete(msg.file);

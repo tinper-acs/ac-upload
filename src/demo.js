@@ -38,6 +38,7 @@ class Demo extends Component {
                     isView={false}
                     onError={(err) => alert('上传报错了')}
                     onSuccess={this.handlerUploadSuccess}
+                    onDelete={file=>console.log(file)}
                 >
                     <Button shape="border" colors="success">上传</Button>
                 </AcUpload>
