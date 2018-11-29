@@ -15,7 +15,8 @@ const propTypes = {
     name: PropTypes.string,
     data: PropTypes.object,
     maxSize: PropTypes.number,
-    isView: PropTypes.bool
+    isView: PropTypes.bool,
+    beforeUpload: PropTypes.func
 };
 
 class AcUpload extends Component {
@@ -77,6 +78,7 @@ class AcUpload extends Component {
             action: this.props.action,
             accept: this.props.accept,
             defaultFileList: this.defaultFileListToList(this.state.historyData),
+            beforeUpload: this.props.beforeUpload,
             onChange: (msg) => {
                 if (msg.file.status == 'done') {
                     this.props.onSuccess && this.props.onSuccess(msg.file.response);

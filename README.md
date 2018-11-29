@@ -60,3 +60,4 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 9|onError|function|上传失败后的回调，用于处理后续失败操作
 10|maxSize|number|附件限制大小
 11|onDelete|function|删除的时候触发的回调参数为file对象
+12|beforeUpload|function|在上传之前执行的函数，当Promise返回false或者被拒绝，函数被中指。不兼容老ie
