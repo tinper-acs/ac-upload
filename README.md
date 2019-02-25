@@ -56,8 +56,9 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 5|accept|string|接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept)
 6|data|JSON|随着上传的时候附加一些参数，接收JSON对象
 7|name|string|上传设置的参数file名字默认`files[]`
-8|onSuccess|function|上传成功后的回调，返回所有response
-9|onError|function|上传失败后的回调，用于处理后续失败操作
-10|maxSize|number|附件限制大小
-11|onDelete|function|删除的时候触发的回调参数为file对象
-12|beforeUpload|function|在上传之前执行的函数，当Promise返回false或者被拒绝，函数被中指。不兼容老ie
+8|locale|string|语言设置选项，默认为简体中文(zh_CN)，目前支持简体中文(zh_CN)，繁体中文(zh_TW)，英文(en_US)三种
+9|onSuccess|function|上传成功后的回调，返回所有response
+10|onError|function|上传失败后的回调，用于处理后续失败操作
+11|maxSize|number|附件限制大小
+12|onDelete|function|删除的时候触发的回调参数为file对象
+13|beforeUpload|function|在上传之前执行的函数，当Promise返回false或者被拒绝，函数被中指。不兼容老ie

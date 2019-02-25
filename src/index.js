@@ -5,6 +5,35 @@
 import React, { Component } from 'react';
 import { Modal, Button, Icon, Upload, Message, Loading, Table, Popconfirm, ProgressBar } from 'tinper-bee';
 import PropTypes from 'prop-types';
+import zh from 'react-intl/locale-data/zh';
+import en from 'react-intl/locale-data/en';
+import zh_CN from './locale/zh_CN.js';
+import en_US from './locale/en_US.js';
+import zh_TW from './locale/zh_TW.js'; 
+import {IntlProvider,addLocaleData,FormattedMessage} from 'react-intl';
+import cookie from 'react-cookies';
+
+//加载国际化文件
+addLocaleData([...en,...zh]);
+
+let messages = {};
+messages['en'] = en_US;
+messages['en-US'] = en_US;
+messages['en_US'] = en_US;
+messages['zh'] = zh_CN;
+messages['zh-CN'] = zh_CN;
+messages['zh_CN'] = zh_CN;
+messages['zh-TW'] = zh_TW;
+messages['zh_TW'] = zh_TW;
+
+let localeMap = {
+    'en-US': 'en',
+    'en_US': 'en',
+    'zh-CN': 'zh',
+    'zh_CN': 'zh',
+    'zh-TW': 'zh',
+    'zh_TW': 'zh'
+}
 
 const propTypes = {
     title: PropTypes.string,
@@ -98,39 +127,44 @@ class AcUpload extends Component {
                     this.props.onDelete && this.props.onDelete(msg.file);
                 }
             }
-        };
+        }
+        let localeSrc = this.props.locale || cookie.load('u_locale') || 'zh'; 
+        let locale = localeMap[localeSrc] || localeSrc;
+
         return (
-            <span className="ac-upload-wrap">
-                <span onClick={this.showModeHandler}>
-                    {this.props.children}
-                </span>
-                <Modal
-                    dialogClassName="ac-upload-modal"
-                    backdrop={false}
-                    autoFocus={false}
-                    enforceFocus={false}
-                    show={this.state.show}
-                    onHide={this.hideModelHandler} >
-                    <Modal.Header
-                        closeButton>
-                        <Modal.Title>{this.props.title}</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <div className="ac-upload-wrap">
-                            <Upload {...uploadProps}>
-                                {!this.props.isView && <div className="opeat">
-                                    <div className="svg-ready"></div>
-                                    <div className="upload-tips">点击选择上传文件</div>
+            <IntlProvider locale={locale} messages={messages[localeSrc]}>
+                <span className="ac-upload-wrap">
+                    <span onClick={this.showModeHandler}>
+                        {this.props.children}
+                    </span>
+                    <Modal
+                        dialogClassName="ac-upload-modal"
+                        backdrop={false}
+                        autoFocus={false}
+                        enforceFocus={false}
+                        show={this.state.show}
+                        onHide={this.hideModelHandler} >
+                        <Modal.Header
+                            closeButton>
+                            <Modal.Title><FormattedMessage id="intl.title" defaultMessage={this.props.title} /></Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <div className="ac-upload-wrap">
+                                <Upload {...uploadProps}>
+                                    {!this.props.isView && <div className="opeat">
+                                        <div className="svg-ready"></div>
+                                        <div className="upload-tips"><FormattedMessage id="intl.msg.upload" /></div>
+                                    </div>}
+                                </Upload>
+                                {(this.props.isView && this.props.defaultFileList.length == 0) && <div className="opeat">
+                                    <div className="svg-no-pic"></div>
+                                    <div style={{ "fontSize": "14px" }} className="upload-tips"><FormattedMessage id="intl.msg.empty" /></div>
                                 </div>}
-                            </Upload>
-                            {(this.props.isView && this.props.defaultFileList.length == 0) && <div className="opeat">
-                                <div className="svg-no-pic"></div>
-                                <div style={{ "fontSize": "14px" }} className="upload-tips">暂无附件</div>
-                            </div>}
-                        </div>
-                    </Modal.Body>
-                </Modal>
-            </span>
+                            </div>
+                        </Modal.Body>
+                    </Modal>
+                </span>
+            </IntlProvider>
         );
     }
 }
@@ -149,4 +183,5 @@ AcUpload.defaultProps = {
     defaultFileList: [],
     isView: false
 }
+
 export default AcUpload;

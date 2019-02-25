@@ -1,13 +1,14 @@
 {
   "name": "ac-upload",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "tinper-bee ac upload components",
   "main": "./lib/index.js",
   "scripts": {
     "dev": "uba server --port=5171",
     "dist": "uba build",
     "build": "rm -rf build && rm -rf lib && rm -rf dist && babel src -d lib --no-comments",
-    "bundle": "webpack --progress --mode=development  && webpack --progress -p --output-filename ac-upload.min.js"
+    "bundle": "webpack --progress --mode=development  && webpack --progress -p --output-filename ac-upload.min.js",
+    "all": "npm run build && npm run bundle"
   },
   "keywords": [
     "yyuap",
@@ -54,5 +55,9 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "react-cookies": "^0.1.0",
+    "react-intl": "^2.8.0"
   }
 }
