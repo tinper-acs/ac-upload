@@ -14,7 +14,6 @@
 - 通过npm下载使用
 `npm install ac-upload -S`
 
-### 3. 使用
 
 通过ES6的方式进行加载使用
 
