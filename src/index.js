@@ -37,6 +37,7 @@ let localeMap = {
 
 const propTypes = {
     title: PropTypes.string,
+    uploadTip: PropTypes.string,
     multiple: PropTypes.bool,
     action: PropTypes.string,
     showUploadList: PropTypes.bool,
@@ -47,6 +48,19 @@ const propTypes = {
     isView: PropTypes.bool,
     beforeUpload: PropTypes.func
 };
+
+const defaultProps = {
+    title: "文件上传",
+    multiple: false,
+    action: "/iuap_pap_quickstart/fileMananger/fastDfs/imgUpload",
+    showUploadList: true,
+    accept: "",
+    name: "files[]",
+    data: {},
+    maxSize: 10240000000,
+    defaultFileList: [],
+    isView: false,
+}
 
 class AcUpload extends Component {
     constructor(props) {
@@ -153,7 +167,7 @@ class AcUpload extends Component {
                                 <Upload {...uploadProps}>
                                     {!this.props.isView && <div className="opeat">
                                         <div className="svg-ready"></div>
-                                        <div className="upload-tips"><FormattedMessage id="intl.msg.upload" /></div>
+                                        <div className="upload-tips">{this.props.uploadTip || <FormattedMessage id="intl.msg.upload" />}</div>
                                     </div>}
                                 </Upload>
                                 {(this.props.isView && this.props.defaultFileList.length == 0) && <div className="opeat">
@@ -171,17 +185,6 @@ class AcUpload extends Component {
 
 
 AcUpload.propTypes = propTypes;
-AcUpload.defaultProps = {
-    title: "文件上传",
-    multiple: false,
-    action: "/iuap_pap_quickstart/fileMananger/fastDfs/imgUpload",
-    showUploadList: true,
-    accept: "",
-    name: "files[]",
-    data: {},
-    maxSize: 10240000000,
-    defaultFileList: [],
-    isView: false
-}
+AcUpload.defaultProps = defaultProps;
 
 export default AcUpload;
