@@ -1,23 +1,19 @@
-## AC-Upload
+# 上传 AcUpload
 
-[![npm version](https://img.shields.io/npm/v/ac-upload.svg)](https://www.npmjs.com/package/ac-upload)
-[![NPM downloads](http://img.shields.io/npm/dt/ac-upload.svg?style=flat)](https://npmjs.org/package/ac-upload)
-
-
-
-### 1. 简介
-
-> 基于tinper-bee组件库封装开发
+基于tinper-bee组件库封装开发
 
 手动上传组件，可以帮助你打开一个模态框选择文件进行上传、也包括拖拽式的上传方式，支持单个文件以及多个文件一起上传使用，上传完毕后，组件会显示查看附件信息
 
+## 何时使用
 
-### 2. 安装
+代替原生上传组件
+
+## 如何使用
+
 
 - 通过npm下载使用
 `npm install ac-upload -S`
 
-### 3. 使用
 
 通过ES6的方式进行加载使用
 
@@ -42,9 +38,10 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 >
     <Button shape="border" colors="info">图片上传</Button>
 </AcUpload>
+
 ```
 
-### 4. API
+## API
 
 
 序号 | 参数 | 类型 | 说明
@@ -62,3 +59,10 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 11|maxSize|number|附件限制大小
 12|onDelete|function|删除的时候触发的回调参数为file对象
 13|beforeUpload|function|在上传之前执行的函数，当Promise返回false或者被拒绝，函数被中指。不兼容老ie
+
+
+## 注意事项
+
+暂无
+
+## 更新日志
