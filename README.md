@@ -59,6 +59,7 @@ import 'ac-upload/build/ac-upload.css';//加载组件样式
 11|maxSize|number|附件限制大小
 12|onDelete|function|删除的时候触发的回调参数为file对象
 13|beforeUpload|function|在上传之前执行的函数，当Promise返回false或者被拒绝，函数被中指。不兼容老ie
+14|uploadTip|string|上传面板中的文字，默认为'点击选择上传文件'
 
 
 ## 注意事项
